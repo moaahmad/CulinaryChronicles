@@ -11,7 +11,9 @@ import SwiftUI
 struct CulinaryChroniclesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                ContentView()
+            }
         }
     }
 }
