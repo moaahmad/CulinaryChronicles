@@ -1,5 +1,5 @@
 //
-//  Spacing.swift
+//  CGFloat+Extensions.swift
 //  CulinaryChronicles
 //
 //  Created by Mo Ahmad on 03/04/2023.

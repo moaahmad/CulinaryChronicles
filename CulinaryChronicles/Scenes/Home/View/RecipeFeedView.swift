@@ -11,6 +11,19 @@ struct RecipeFeedView<ViewModel: RecipeViewModeling & ObservableObject>: View {
     @ObservedObject var viewModel: ViewModel
 
     var body: some View {
+        if viewModel.isLoading {
+            ProgressView().progressViewStyle(.circular)
+        } else {
+            ContentView(viewModel: viewModel)
+        }
+    }
+}
+
+extension RecipeFeedView {
+    struct ContentView: View {
+        @ObservedObject var viewModel: ViewModel
+
+        var body: some View {
             List(viewModel.recipes, id: \.id) { recipe in
                 ZStack {
                     NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
@@ -31,6 +44,7 @@ struct RecipeFeedView<ViewModel: RecipeViewModeling & ObservableObject>: View {
             .listStyle(PlainListStyle())
             .refreshable { viewModel.refreshFeed() }
             .navigationTitle("Recipes")
+        }
     }
 }
 
@@ -49,6 +63,7 @@ private extension RecipeFeedView {
 
 struct RecipeFeedView_Previews: PreviewProvider {
     final class PreviewViewModel: RecipeViewModeling & ObservableObject {
+        var isLoading: Bool = false
         var recipes: [Recipe] = [
             .init(
                 id: "food/2023/mar/18/recipes-for-ramadan-taysir-ghazis-ful-medames-four-ways",

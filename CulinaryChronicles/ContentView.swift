@@ -8,19 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    /// ContentSizeCategory represents the preferred content
+    /// size category set by the user in their device settings.
+    @Environment(\.sizeCategory) var sizeCategory
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+    var body: some View {
+        RecipeFeedView(viewModel: RecipeViewModel())
+            .environment(\.sizeCategory, sizeCategory)
     }
 }

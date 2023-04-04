@@ -9,28 +9,38 @@ import Combine
 import Foundation
 
 protocol RecipeServicing {
-    func fetchRecipes(page: Int) -> AnyPublisher<[Recipe], Error>
+    func fetchRecipes(page: Int) -> Future<RecipeResponse, Error>
 }
 
 struct RecipeService: RecipeServicing {
-    private let baseUrl = "https://content.guardianapis.com/search"
-    private let apiKey = "fe8e58cf-cf66-4014-9b2d-b56cb3a7ea8d"
+    // MARK: - Properties
 
-    func fetchRecipes(page: Int = 1) -> AnyPublisher<[Recipe], Error> {
-        var urlComponents = URLComponents(string: baseUrl)!
-        urlComponents.queryItems = [
-            URLQueryItem(name: "tag", value: "tone/recipes"),
-            URLQueryItem(name: "show-tags", value: "series"),
-            URLQueryItem(name: "show-fields", value: "thumbnail,headline"),
-            URLQueryItem(name: "api-key", value: apiKey),
-            URLQueryItem(name: "page", value: "\(page)")
-        ]
+    private let dataProvider: DataProviding
+    private let urlRequestPool: URLRequestPooling
 
-        return URLSession.shared.dataTaskPublisher(for: urlComponents.url!)
-            .map { $0.data }
-            .decode(type: RecipeResponse.self, decoder: JSONDecoder())
-            .map { $0.response.results }
-            .print()
-            .eraseToAnyPublisher()
+    // MARK: - Initializer
+
+    init(
+        dataProvider: DataProviding = DataProvider(),
+        urlRequestPool: URLRequestPooling = URLRequestPool()
+    ) {
+        self.dataProvider = dataProvider
+        self.urlRequestPool = urlRequestPool
+    }
+
+    // MARK: - RecipeServicing Functions
+    
+    func fetchRecipes(page: Int = 1) -> Future<RecipeResponse, Error> {
+        let request = urlRequestPool.fetchRecipesRequest(forPage: page)
+        return Future<RecipeResponse, Error> { promise in
+            dataProvider.fetch(type: RecipeResponse.self, urlRequest: request) { result in
+                switch result {
+                case .success(let response):
+                    promise(.success(response))
+                case .failure(let error):
+                    promise(.failure(error))
+                }
+            }
+        }
     }
 }

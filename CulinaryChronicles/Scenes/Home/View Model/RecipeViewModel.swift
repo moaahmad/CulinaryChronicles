@@ -10,6 +10,7 @@ import Foundation
 
 protocol RecipeViewModeling {
     var recipes: [Recipe] { get }
+    var isLoading: Bool { get }
 
     func loadMoreContentIfNeeded(currentItem: Recipe?)
     func refreshFeed()
@@ -22,13 +23,14 @@ final class RecipeViewModel: RecipeViewModeling & ObservableObject {
 
     private var cancellables = Set<AnyCancellable>()
     private var currentPage = 1
-    private var isLoading = false
+    private var isFetching = false
     private var isRefreshing = false
     private var isLastPage = false
 
     // MARK: - Published Properties
 
     @Published var recipes: [Recipe] = []
+    @Published var isLoading = true
 
     // MARK: - Initializer
 
@@ -60,28 +62,45 @@ final class RecipeViewModel: RecipeViewModeling & ObservableObject {
 
 private extension RecipeViewModel {
     func fetchRecipes(completion: (() -> Void)? = nil) {
-        guard !isLoading && !isLastPage else { return }
-        isLoading = true
+        guard !isFetching && !isLastPage else { return }
+        isFetching = true
         currentPage = isRefreshing ? 1 : currentPage
 
         service.fetchRecipes(page: currentPage)
             .receive(on: DispatchQueue.main)
+            .map { $0.response.results }
             .sink { [weak self] completion in
                 guard let self else { return }
-                self.isLoading = false
-                self.isRefreshing = false
+                self.handleCompletion(completion: completion)
 
-                if case let .failure(error) = completion {
-                    print("Error fetching recipes: \(error.localizedDescription)")
-                }
             } receiveValue: { [weak self] recipes in
                 guard let self else { return }
-
-                if self.isRefreshing { self.recipes = [] }
-                self.recipes.append(contentsOf: recipes)
-                recipes.isEmpty ? (self.isLastPage = true) : (self.currentPage += 1)
+                self.handleResponse(recipes: recipes)
                 completion?()
             }
             .store(in: &cancellables)
+    }
+
+    func handleCompletion(completion: Subscribers.Completion<Error>) {
+        // Update states
+        self.isLoading = false
+        self.isFetching = false
+        self.isRefreshing = false
+
+        // If there's an error, log it in the console for now
+        if case let .failure(error) = completion {
+            print("Error fetching recipes: \(error.localizedDescription)")
+        }
+    }
+
+    func handleResponse(recipes: [Recipe]) {
+        // If refreshing, we only want to see the first page results
+        if self.isRefreshing { self.recipes = [] }
+        self.recipes.append(contentsOf: recipes)
+
+        // If we don't receive any results and there is no error
+        // set isLastPage to be true so we don't paginate again,
+        // otherwise increment currentPage as normal
+        recipes.isEmpty ? (self.isLastPage = true) : (self.currentPage += 1)
     }
 }
