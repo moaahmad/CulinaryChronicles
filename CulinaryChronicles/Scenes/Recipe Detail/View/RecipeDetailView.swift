@@ -28,6 +28,8 @@ struct RecipeDetailView: View {
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.secondary)
+                        .accessibilityLabel(AccessibilityIdentifier.tagLabel)
+                        .accessibilityIdentifier(AccessibilityIdentifier.tagID)
                 }
 
                 // Headline View
@@ -36,6 +38,8 @@ struct RecipeDetailView: View {
                     .fontWeight(.regular)
                     .foregroundColor(.primary)
                     .multilineTextAlignment(.leading)
+                    .accessibilityLabel(AccessibilityIdentifier.headlineLabel)
+                    .accessibilityIdentifier(AccessibilityIdentifier.headlineID)
             }
             .padding(.all, .Spacer.sm)
         }
@@ -56,9 +60,14 @@ private extension RecipeDetailView {
 // MARK: - Accessibility Identifiers
 
 private extension RecipeDetailView {
+    // TODO: - Make the custom labels more descriptive for VoiceOver
     struct AccessibilityIdentifier {
         private init() {}
         static var imageID: String { "Recipe image" }
+        static var tagLabel: String { "Recipe tag" }
+        static var tagID: String { "recipeTag" }
+        static var headlineLabel: String { "Recipe headline" }
+        static var headlineID: String { "recipeHeadline" }
     }
 }
 

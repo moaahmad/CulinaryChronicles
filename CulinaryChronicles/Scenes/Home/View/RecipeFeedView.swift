@@ -36,7 +36,8 @@ extension RecipeFeedView {
                 .listRowInsets(EdgeInsets())
                 .background(Color(.systemBackground))
                 .accessibilityElement(children: .ignore)
-                .accessibilityLabel(AccessibilityIdentifier.recipeCellID(recipe))
+                .accessibilityLabel(AccessibilityIdentifier.recipeCellLabel(recipe))
+                .accessibilityIdentifier(AccessibilityIdentifier.recipeCellID(recipe))
                 .onAppear {
                     viewModel.loadMoreContentIfNeeded(currentItem: recipe)
                 }
@@ -53,8 +54,12 @@ extension RecipeFeedView {
 private extension RecipeFeedView {
     struct AccessibilityIdentifier {
         private init() {}
-        static func recipeCellID(_ recipe: Recipe) -> String {
+        static func recipeCellLabel(_ recipe: Recipe) -> String {
             "\(recipe.fields.headline), \(recipe.tags.first?.webTitle ?? "")"
+        }
+
+        static func recipeCellID(_ recipe: Recipe) -> String {
+            "recipeCell-\(recipe.id)"
         }
     }
 }
