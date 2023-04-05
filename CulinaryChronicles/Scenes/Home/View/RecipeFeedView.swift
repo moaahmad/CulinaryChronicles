@@ -30,11 +30,11 @@ extension RecipeFeedView {
                 ZStack {
                     NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                         EmptyView()
-                    }
-                    .opacity(0)
+                    }.opacity(0)
 
                     RecipeCellView(recipe: recipe)
                 }
+                .frame(maxWidth: .infinity)
                 .listRowInsets(EdgeInsets())
                 .background(Color(.systemBackground))
                 .accessibilityElement(children: .ignore)
