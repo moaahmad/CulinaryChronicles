@@ -17,15 +17,18 @@ struct RecipeService: RecipeServicing {
 
     private let client: HTTPClient
     private let urlRequestPool: URLRequestPooling
+    private let decoder: JSONDecoder
 
     // MARK: - Initializer
 
     init(
         client: HTTPClient = URLSessionHTTPClient(),
-        urlRequestPool: URLRequestPooling = URLRequestPool()
+        urlRequestPool: URLRequestPooling = URLRequestPool(),
+        decoder: JSONDecoder = .init()
     ) {
         self.client = client
         self.urlRequestPool = urlRequestPool
+        self.decoder = decoder
     }
 
     // MARK: - RecipeServicing Functions
@@ -55,7 +58,7 @@ private extension RecipeService {
             if response.statusCode != 200 {
                 promise(.failure(ResponseError.invalidResponse))
             } else {
-                let response = try JSONDecoder().decode(RecipeResponse.self, from: data)
+                let response = try decoder.decode(RecipeResponse.self, from: data)
                 promise(.success(response))
             }
         } catch {

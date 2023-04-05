@@ -50,7 +50,7 @@ private extension URLPool {
         guard let url = urlComponents.url,
               let urlString = url.absoluteString.removingPercentEncoding,
               let fullURL = URL(string: urlString) else {
-            fatalError("URL is not correctly configured")
+            fatalError("URL is not correctly configured - please ensure an API key is added to `Debug.xcconfig`")
         }
         return fullURL
     }

@@ -12,11 +12,12 @@ struct CulinaryChroniclesApp: App {
     /// ContentSizeCategory represents the preferred content
     /// size category set by the user in their device settings.
     @Environment(\.sizeCategory) var sizeCategory
+    @StateObject private var viewModel = RecipeViewModel()
     
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                RecipeFeedView(viewModel: RecipeViewModel())
+                RecipeFeedView(viewModel: viewModel)
                     .environment(\.sizeCategory, sizeCategory)
             }
         }

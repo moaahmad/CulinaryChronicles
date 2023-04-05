@@ -33,12 +33,21 @@ final class RecipeViewModel: RecipeViewModeling & ObservableObject {
     // MARK: - Published Properties
 
     @Published var recipes: [Recipe] = []
-    @Published var isLoading = true
+    @Published var isLoading: Bool
 
     // MARK: - Initializer
 
     init(service: RecipeServicing = RecipeService()) {
         self.service = service
+
+        /// On iOS 16.4 there seems to be a bug which is stopping the view updating when `isLoading` is changed to false.
+        /// The below approach of checking the OS version will do for now, as this needs further investigating.
+        if #available(iOS 16.4, *) {
+            isLoading = false
+        } else {
+            isLoading = true
+        }
+
         fetchRecipes()
     }
 
@@ -90,7 +99,7 @@ private extension RecipeViewModel {
         self.isFetching = false
         self.isRefreshing = false
 
-        // If there's an error, log it in the console for now
+        // If there's an error, log it to the console for now
         if case let .failure(error) = completion {
             print("Error fetching recipes: \(error.localizedDescription)")
         }

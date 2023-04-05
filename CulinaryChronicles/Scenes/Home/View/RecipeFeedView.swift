@@ -57,7 +57,7 @@ private extension RecipeFeedView {
     struct AccessibilityIdentifier {
         private init() {}
         static func recipeCellLabel(_ recipe: Recipe) -> String {
-            "\(recipe.fields.headline), \(recipe.tags.first?.webTitle ?? "")"
+            "\(recipe.tags.first?.webTitle ?? ""), Headline \(recipe.fields.headline)"
         }
 
         static func recipeCellID(_ recipe: Recipe) -> String {
