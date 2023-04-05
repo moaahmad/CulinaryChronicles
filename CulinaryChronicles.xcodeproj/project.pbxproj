@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E1046B229DDB42F005917C4 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1046B129DDB42F005917C4 /* HTTPClient.swift */; };
 		4EE2101129D7248E00F68B99 /* CulinaryChroniclesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE2101029D7248E00F68B99 /* CulinaryChroniclesApp.swift */; };
 		4EE2101529D7248F00F68B99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EE2101429D7248F00F68B99 /* Assets.xcassets */; };
 		4EE2101829D7248F00F68B99 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4EE2101729D7248F00F68B99 /* Preview Assets.xcassets */; };
@@ -59,6 +60,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E1046B129DDB42F005917C4 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		4EE2100D29D7248E00F68B99 /* CulinaryChronicles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CulinaryChronicles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EE2101029D7248E00F68B99 /* CulinaryChroniclesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CulinaryChroniclesApp.swift; sourceTree = "<group>"; };
 		4EE2101429D7248F00F68B99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 		4EE2104129DB1FEC00F68B99 /* Data Provider */ = {
 			isa = PBXGroup;
 			children = (
+				4E1046B129DDB42F005917C4 /* HTTPClient.swift */,
 				4EE2104229DB1FFF00F68B99 /* URLSessionHTTPClient.swift */,
 			);
 			path = "Data Provider";
@@ -576,6 +579,7 @@
 				4EE2103729D7AE6900F68B99 /* RecipeViewModel.swift in Sources */,
 				4EE2104D29DB29F700F68B99 /* URLRequestPool.swift in Sources */,
 				4EE2109929DD00E000F68B99 /* Strings+Extensions.swift in Sources */,
+				4E1046B229DDB42F005917C4 /* HTTPClient.swift in Sources */,
 				4EE2103529D7AADC00F68B99 /* RemoteImageView.swift in Sources */,
 				4EE2104629DB203400F68B99 /* Data+Extensions.swift in Sources */,
 				4EE2104029DB096400F68B99 /* RecipeCellView.swift in Sources */,

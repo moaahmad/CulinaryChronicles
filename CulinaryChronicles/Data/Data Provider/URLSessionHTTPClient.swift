@@ -8,12 +8,6 @@
 import Combine
 import Foundation
 
-protocol HTTPClient {
-    typealias Result = Swift.Result<(Data, HTTPURLResponse), Error>
-
-    func performRequest(_ request: URLRequest, completion: @escaping (Result) -> Void)
-}
-
 final class URLSessionHTTPClient: HTTPClient {
     private struct UnexpectedValuesRepresentation: Error {}
 

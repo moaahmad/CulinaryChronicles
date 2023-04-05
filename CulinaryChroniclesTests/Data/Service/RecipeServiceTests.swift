@@ -117,7 +117,7 @@ extension RecipeServiceTests {
 // MARK: - Load Feed Success Tests
 
 extension RecipeServiceTests {
-    func test_fetchRecipes_onSuccess_returnsStocks() {
+    func test_fetchRecipes_onSuccess_returnsRecipes() {
         // Given
         let (sut, client) = makeSUT()
         let exp = expectation(description: "Wait for fetch completion")
