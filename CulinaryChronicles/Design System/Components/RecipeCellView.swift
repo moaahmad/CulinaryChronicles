@@ -26,7 +26,7 @@ struct RecipeCellView: View {
                     .font(.title2)
                     .fontWeight(.regular)
                     .foregroundColor(.primary)
-                    .lineLimit(2)
+                    .lineLimit(Constant.lineLimit)
                     .multilineTextAlignment(.leading)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -34,14 +34,27 @@ struct RecipeCellView: View {
             // Image View
             if let imageURL = recipe.fields.thumbnailURL {
                 RemoteImageView(imageURL: imageURL)
-                    .aspectRatio(1.6, contentMode: .fit)
-                    .cornerRadius(12)
+                    .aspectRatio(Constant.imageAspectRatio, contentMode: .fill)
+                    .cornerRadius(Constant.cornerRadius)
                     .padding(.bottom, .Spacer.md)
             }
         }
         .padding([.horizontal, .top], .Spacer.sm)
     }
 }
+
+// MARK: - Constants
+
+private extension RecipeCellView {
+    struct Constant {
+        private init() {}
+        static var lineLimit: Int { 2 }
+        static var imageAspectRatio: CGFloat { 1.6 }
+        static var cornerRadius: CGFloat { 12 }
+    }
+}
+
+// MARK: - Previews
 
 struct RecipeCellView_Previews: PreviewProvider {
     static var previews: some View {

@@ -14,25 +14,32 @@ struct Recipe: Codable, Identifiable {
     let tags: [Tag]
 }
 
+// MARK: - Equatable Conformance
+
 extension Recipe: Equatable {
     static func == (lhs: Recipe, rhs: Recipe) -> Bool {
         lhs.id == rhs.id
     }
 }
 
-struct Fields: Codable {
-    let thumbnail: String
-    let headline: String
+// MARK: - Subdomains
 
-    var thumbnailURL: URL? {
-        guard let url = URL(string: thumbnail) else {
-            return nil
+extension Recipe {
+    struct Fields: Codable {
+        let thumbnail: String
+        let headline: String
+
+        var thumbnailURL: URL? {
+            guard let url = URL(string: thumbnail) else {
+                return nil
+            }
+            return url
         }
-        return url
+    }
+
+    struct Tag: Codable {
+        let id: String
+        let webTitle: String
     }
 }
 
-struct Tag: Codable {
-    let id: String
-    let webTitle: String
-}

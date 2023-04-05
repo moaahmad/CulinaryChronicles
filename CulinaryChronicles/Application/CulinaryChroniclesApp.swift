@@ -9,10 +9,15 @@ import SwiftUI
 
 @main
 struct CulinaryChroniclesApp: App {
+    /// ContentSizeCategory represents the preferred content
+    /// size category set by the user in their device settings.
+    @Environment(\.sizeCategory) var sizeCategory
+    
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                ContentView()
+                RecipeFeedView(viewModel: RecipeViewModel())
+                    .environment(\.sizeCategory, sizeCategory)
             }
         }
     }

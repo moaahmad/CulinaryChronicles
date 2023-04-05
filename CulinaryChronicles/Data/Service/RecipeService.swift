@@ -15,16 +15,16 @@ protocol RecipeServicing {
 struct RecipeService: RecipeServicing {
     // MARK: - Properties
 
-    private let dataProvider: DataProviding
+    private let client: HTTPClient
     private let urlRequestPool: URLRequestPooling
 
     // MARK: - Initializer
 
     init(
-        dataProvider: DataProviding = DataProvider(),
+        client: HTTPClient = URLSessionHTTPClient(),
         urlRequestPool: URLRequestPooling = URLRequestPool()
     ) {
-        self.dataProvider = dataProvider
+        self.client = client
         self.urlRequestPool = urlRequestPool
     }
 
@@ -33,14 +33,33 @@ struct RecipeService: RecipeServicing {
     func fetchRecipes(page: Int = 1) -> Future<RecipeResponse, Error> {
         let request = urlRequestPool.fetchRecipesRequest(forPage: page)
         return Future<RecipeResponse, Error> { promise in
-            dataProvider.fetch(type: RecipeResponse.self, urlRequest: request) { result in
+            client.performRequest(request) { result in
                 switch result {
-                case .success(let response):
-                    promise(.success(response))
+                case let .success((data, response)):
+                    handleFetchRecipesSuccessResponse(data: data, response: response, promise: promise)
                 case .failure(let error):
                     promise(.failure(error))
                 }
             }
+        }
+    }
+}
+
+private extension RecipeService {
+    func handleFetchRecipesSuccessResponse(
+        data: Data,
+        response: HTTPURLResponse,
+        promise: (Result<RecipeResponse, Error>) -> Void
+    ) {
+        do {
+            if response.statusCode != 200 {
+                promise(.failure(ResponseError.invalidResponse))
+            } else {
+                let response = try JSONDecoder().decode(RecipeResponse.self, from: data)
+                promise(.success(response))
+            }
+        } catch {
+            promise(.failure(ResponseError.invalidData))
         }
     }
 }

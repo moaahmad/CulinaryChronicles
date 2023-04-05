@@ -8,26 +8,26 @@
 import SwiftUI
 
 struct RecipeDetailView: View {
-    // TODO: Use a RecipeViewModel instead
+    // TODO: Use a ViewModel instead - this will do for now though.
     let recipe: Recipe
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: .Spacer.xs) {
+                // Image View
+                if let imageURL = recipe.fields.thumbnailURL {
+                    RemoteImageView(imageURL: imageURL)
+                        .aspectRatio(Constant.imageAspectRatio, contentMode: .fill)
+                        .cornerRadius(Constant.cornerRadius)
+                        .accessibilityLabel(AccessibilityIdentifier.imageID)
+                }
+
                 // Tag View
                 if let tag = recipe.tags.first?.webTitle {
                     Text(tag.uppercased())
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.secondary)
-                }
-
-                // Image View
-                if let imageURL = recipe.fields.thumbnailURL {
-                    RemoteImageView(imageURL: imageURL)
-                        .aspectRatio(Constant.imageAspectRatio, contentMode: .fit)
-                        .cornerRadius(Constant.cornerRadius)
-                        .accessibilityLabel(AccessibilityIdentifier.imageID)
                 }
 
                 // Headline View

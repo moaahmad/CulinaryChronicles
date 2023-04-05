@@ -31,8 +31,8 @@ struct RemoteImageView: View {
     }
 }
 
-//struct RemoteImage_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RemoteImage()
-//    }
-//}
+struct RemoteImage_Previews: PreviewProvider {
+    static var previews: some View {
+        RemoteImageView(imageURL: URL(string: "https://media.guim.co.uk/c15c453c8e89db724c3c427f8c37621701350894/70_7_2614_1568/500.jpg")!)
+    }
+}

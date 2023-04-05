@@ -11,6 +11,7 @@ import Foundation
 protocol RecipeViewModeling {
     var recipes: [Recipe] { get }
     var isLoading: Bool { get }
+    var title: String { get }
 
     func loadMoreContentIfNeeded(currentItem: Recipe?)
     func refreshFeed()
@@ -21,11 +22,13 @@ final class RecipeViewModel: RecipeViewModeling & ObservableObject {
 
     private let service: RecipeServicing
 
-    private var cancellables = Set<AnyCancellable>()
+    private var cancellables: Set<AnyCancellable> = .init()
     private var currentPage = 1
     private var isFetching = false
     private var isRefreshing = false
     private var isLastPage = false
+
+    lazy var title = "Recipes"
 
     // MARK: - Published Properties
 
@@ -42,7 +45,7 @@ final class RecipeViewModel: RecipeViewModeling & ObservableObject {
     // MARK: - RecipeViewModeling Functions
     
     func loadMoreContentIfNeeded(currentItem: Recipe?) {
-        guard let currentItem = currentItem else { return }
+        guard let currentItem else { return }
         let thresholdIndex = recipes.index(recipes.endIndex, offsetBy: -4)
         if let lastIndex = recipes.firstIndex(where: { $0.id == currentItem.id }),
             lastIndex >= thresholdIndex {

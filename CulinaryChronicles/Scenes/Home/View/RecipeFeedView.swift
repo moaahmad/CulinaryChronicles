@@ -43,7 +43,7 @@ extension RecipeFeedView {
             }
             .listStyle(PlainListStyle())
             .refreshable { viewModel.refreshFeed() }
-            .navigationTitle("Recipes")
+            .navigationTitle(viewModel.title)
         }
     }
 }
@@ -63,6 +63,7 @@ private extension RecipeFeedView {
 
 struct RecipeFeedView_Previews: PreviewProvider {
     final class PreviewViewModel: RecipeViewModeling & ObservableObject {
+        var title: String = "Recipes"
         var isLoading: Bool = false
         var recipes: [Recipe] = [
             .init(
