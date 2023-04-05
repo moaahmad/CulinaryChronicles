@@ -68,5 +68,6 @@ struct RecipeCellView_Previews: PreviewProvider {
                 tags: [.init(id: "food/series/recipes-for-ramadan", webTitle: "Recipes for Ramadan")]
             )
         )
+        .scaledToFit()
     }
 }

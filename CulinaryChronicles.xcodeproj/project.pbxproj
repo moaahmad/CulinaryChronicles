@@ -41,6 +41,11 @@
 		4EE2108E29DCE23E00F68B99 /* Recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 4EE2108D29DCE23E00F68B99 /* Recipes.json */; };
 		4EE2109029DCF86C00F68B99 /* MockRecipeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE2108F29DCF86C00F68B99 /* MockRecipeService.swift */; };
 		4EE2109429DCF9F600F68B99 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE2109329DCF9F500F68B99 /* Spacing.swift */; };
+		4EE2109729DD00A300F68B99 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4EE2109629DD00A300F68B99 /* Localizable.strings */; };
+		4EE2109929DD00E000F68B99 /* Strings+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE2109829DD00E000F68B99 /* Strings+Extensions.swift */; };
+		4EE2109C29DDA4DE00F68B99 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 4EE2109B29DDA4DE00F68B99 /* SnapshotTesting */; };
+		4EE210A129DDA5B200F68B99 /* RecipeCellViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE210A029DDA5B200F68B99 /* RecipeCellViewTests.swift */; };
+		4EF34EE829DDA8A2002DED8C /* RemoteImageViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF34EE729DDA8A2002DED8C /* RemoteImageViewTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +96,10 @@
 		4EE2108D29DCE23E00F68B99 /* Recipes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Recipes.json; sourceTree = "<group>"; };
 		4EE2108F29DCF86C00F68B99 /* MockRecipeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRecipeService.swift; sourceTree = "<group>"; };
 		4EE2109329DCF9F500F68B99 /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
+		4EE2109629DD00A300F68B99 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		4EE2109829DD00E000F68B99 /* Strings+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Extensions.swift"; sourceTree = "<group>"; };
+		4EE210A029DDA5B200F68B99 /* RecipeCellViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCellViewTests.swift; sourceTree = "<group>"; };
+		4EF34EE729DDA8A2002DED8C /* RemoteImageViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageViewTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EE2109C29DDA4DE00F68B99 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +204,7 @@
 				4EE2105229DB2EA000F68B99 /* Configurations */,
 				4EE2105629DB2F7F00F68B99 /* Info.plist */,
 				4EE2101629D7248F00F68B99 /* Preview Content */,
+				4EE2109629DD00A300F68B99 /* Localizable.strings */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -278,6 +289,7 @@
 				4EE2104529DB203400F68B99 /* Data+Extensions.swift */,
 				4EE2104E29DB2A2300F68B99 /* URLRequest+Extensions.swift */,
 				4EE2105729DB89AF00F68B99 /* HTTPURLResponse+Extensions.swift */,
+				4EE2109829DD00E000F68B99 /* Strings+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -304,6 +316,8 @@
 		4EE2106029DC505500F68B99 /* CulinaryChroniclesTests */ = {
 			isa = PBXGroup;
 			children = (
+				4EE2106D29DC53D100F68B99 /* Data */,
+				4EE2109D29DDA4EA00F68B99 /* Design System */,
 				4EE2106829DC519D00F68B99 /* Scenes */,
 				4EE2107029DC540C00F68B99 /* Utilities */,
 				4EE2107929DC575100F68B99 /* Stubs */,
@@ -314,7 +328,6 @@
 		4EE2106829DC519D00F68B99 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				4EE2106D29DC53D100F68B99 /* Data */,
 				4EE2106929DC51A500F68B99 /* Home */,
 			);
 			path = Scenes;
@@ -427,6 +440,23 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		4EE2109D29DDA4EA00F68B99 /* Design System */ = {
+			isa = PBXGroup;
+			children = (
+				4EE2109F29DDA53700F68B99 /* Components */,
+			);
+			path = "Design System";
+			sourceTree = "<group>";
+		};
+		4EE2109F29DDA53700F68B99 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4EE210A029DDA5B200F68B99 /* RecipeCellViewTests.swift */,
+				4EF34EE729DDA8A2002DED8C /* RemoteImageViewTests.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -464,6 +494,9 @@
 				4EE2106429DC505500F68B99 /* PBXTargetDependency */,
 			);
 			name = CulinaryChroniclesTests;
+			packageProductDependencies = (
+				4EE2109B29DDA4DE00F68B99 /* SnapshotTesting */,
+			);
 			productName = CulinaryChroniclesTests;
 			productReference = 4EE2105F29DC505500F68B99 /* CulinaryChroniclesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -498,6 +531,7 @@
 			mainGroup = 4EE2100429D7248E00F68B99;
 			packageReferences = (
 				4EE2102B29D79E5200F68B99 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				4EE2109A29DDA4DE00F68B99 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
 			);
 			productRefGroup = 4EE2100E29D7248E00F68B99 /* Products */;
 			projectDirPath = "";
@@ -515,6 +549,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EE2101829D7248F00F68B99 /* Preview Assets.xcassets in Resources */,
+				4EE2109729DD00A300F68B99 /* Localizable.strings in Resources */,
 				4EE2101529D7248F00F68B99 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +575,7 @@
 				4EE2104329DB1FFF00F68B99 /* URLSessionHTTPClient.swift in Sources */,
 				4EE2103729D7AE6900F68B99 /* RecipeViewModel.swift in Sources */,
 				4EE2104D29DB29F700F68B99 /* URLRequestPool.swift in Sources */,
+				4EE2109929DD00E000F68B99 /* Strings+Extensions.swift in Sources */,
 				4EE2103529D7AADC00F68B99 /* RemoteImageView.swift in Sources */,
 				4EE2104629DB203400F68B99 /* Data+Extensions.swift in Sources */,
 				4EE2104029DB096400F68B99 /* RecipeCellView.swift in Sources */,
@@ -566,10 +602,12 @@
 				4EE2108329DC8A6C00F68B99 /* URLSessionHTTPClientTests.swift in Sources */,
 				4EE2106C29DC51C500F68B99 /* RecipeViewModelTests.swift in Sources */,
 				4EE2107B29DC577200F68B99 /* MockURLProtocol.swift in Sources */,
+				4EE210A129DDA5B200F68B99 /* RecipeCellViewTests.swift in Sources */,
 				4EE2107329DC543400F68B99 /* URLPoolTests.swift in Sources */,
 				4EE2109029DCF86C00F68B99 /* MockRecipeService.swift in Sources */,
 				4EE2108729DCA2AB00F68B99 /* RecipeServiceTests.swift in Sources */,
 				4EE2107E29DC59C400F68B99 /* MockServer.swift in Sources */,
+				4EF34EE829DDA8A2002DED8C /* RemoteImageViewTests.swift in Sources */,
 				4EE2107529DC543F00F68B99 /* URLRequestPoolTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -838,6 +876,14 @@
 				version = 7.6.2;
 			};
 		};
+		4EE2109A29DDA4DE00F68B99 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing";
+			requirement = {
+				kind = exactVersion;
+				version = 1.9.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -845,6 +891,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4EE2102B29D79E5200F68B99 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		4EE2109B29DDA4DE00F68B99 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4EE2109A29DDA4DE00F68B99 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -28,7 +28,7 @@ final class RecipeViewModel: RecipeViewModeling & ObservableObject {
     private var isRefreshing = false
     private var isLastPage = false
 
-    lazy var title = "Recipes"
+    lazy var title = "recipes_feed_title".localized()
 
     // MARK: - Published Properties
 

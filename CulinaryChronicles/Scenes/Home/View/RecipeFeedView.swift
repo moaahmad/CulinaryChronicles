@@ -25,11 +25,13 @@ extension RecipeFeedView {
 
         var body: some View {
             List(viewModel.recipes, id: \.id) { recipe in
+                /// This `ZStack` with `.opacity(0)` approach is being used
+                /// to hide the default appearance, including the chevrons.
                 ZStack {
                     NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                         EmptyView()
                     }
-                    .opacity(0) // Hide the default appearance, including the chevron
+                    .opacity(0)
 
                     RecipeCellView(recipe: recipe)
                 }
