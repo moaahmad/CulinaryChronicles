@@ -23,7 +23,6 @@ final class URLSessionHTTPClient: HTTPClient {
 
     // MARK: - HTTPClient Functions
 
-
     func performRequest(_ request: URLRequest, completion: @escaping (HTTPClient.Result) -> Void) {
         session.dataTask(with: request) { data, response, error in
             completion(Result {
